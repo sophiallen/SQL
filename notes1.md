@@ -11,3 +11,10 @@ Today we:
   - never keep the log file on the same disk as the data file, or else if the disc with the data fails you have no backup. 
   - "dbo" refers to database owner, it's the default schema. 
 - Started a new query (see query1)
+  - GO separates batches (it's a microsoft keyword, not really a SQL keword)
+  - Semi-colons are not required in the management studio, but are most other places. 
+  - CREATE database is smart enough to figure out where the db should be added, if you don't specify. 
+  - identity keyword auto-increments the key, primary key is self explanatory. 
+  - the n in nvarchar indicates unicode. Without it (varchar) is ASCII.
+  
+  
