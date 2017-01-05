@@ -1,0 +1,61 @@
+/*use Community_Assist
+
+
+SELECT * FROM Person
+
+CREATE database TestTable
+
+USE TestTable
+
+Create table Student(
+	StudentKey int identity(1,1) primary key,
+	StudentLastName nvarchar(255) not null,
+	StudentFirstName nvarchar(255) not null, 
+	StudentEmail nvarchar(255) null
+)
+
+
+Create table Course(
+	CourseKey int identity(1,1) primary key, 
+	CourseName nvarchar(255) not null,
+	CourseCredit int default 5 -- default value
+)
+*/
+Create table Section (
+	SectionKey int identity(1,1),
+	CourseKey int not null foreign key references Course(CourseKey), --inline way to create foreign key
+	SectionYear int default 2017,
+	SectionQuarter nvarchar(6),
+	Constraint constraint_quarter check (SectionQuarter in ('FALL', 'WINTER', 'SPRING', 'SUMMER')), 
+	Constraint PK_SectionKey primary key (SectionKey)
+)
+
+Create Table Roster(
+	RosterKey int identity not null,
+	SectionKey int not null, 
+	StudentKey int not null,
+	StudentSectionGrade decimal(2,1) null, --  you must define the size of a decimal when declaring it, and it must be nullable. 
+)
+
+Alter table Roster 
+Add constraint PK_Roster primary key (RosterKey)
+
+Alter table Roster
+Add constraint FK_Roster Foreign Key(SectionKey) References Section(SectionKey)
+
+Alter table Roster 
+Add constraint FK_Student Foreign Key(StudentKey) References Student(StudentKey)
+
+Alter table Roster
+Add constraint ck_Grade check (StudentSectionGrade between 0 and 4)
+
+Alter table Student 
+Add constraint uq_Email unique(StudentEmail)
+
+Alter table Student 
+Add StudentID nvarchar(9) -- note: ints don't allow leading 0's
+
+/*Dropping columns*/
+Alter table Student 
+Drop column StudentId
+
