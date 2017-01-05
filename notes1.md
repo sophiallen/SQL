@@ -14,7 +14,8 @@ Today we:
   - GO separates batches (it's a microsoft keyword, not really a SQL keword)
   - Semi-colons are not required in the management studio, but are most other places. 
   - CREATE database is smart enough to figure out where the db should be added, if you don't specify. 
-  - identity keyword auto-increments the key, primary key is self explanatory. 
-  - the n in nvarchar indicates unicode. Without it (varchar) is ASCII.
+  - identity(start, step) keyword auto-increments the key, primary key is self explanato
+  - the n in nvarchar indicates unicode. Without it (varchar) is ASCII. N**var**char tends to take more processing power than **n**char (fixed length), nchar tends to take up more disk space. 
+- Comments in SQL: /*Multiline */ or -- Single Line
   
   
