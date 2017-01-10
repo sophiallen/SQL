@@ -26,7 +26,7 @@ Buskey int foreign key related to Bus, required
 Create table Maintenance(
 	MaintenanceKey int identity(1,1) primary key,
 	MaintenanceDate datetime not null,
-	Maintenance int not null foreign key references BusService(BusServiceKey)
+	BusKey int not null foreign key references Bus(BusKey)
 )
 
 /* 3. MaintenanceDetail
