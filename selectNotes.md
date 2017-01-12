@@ -1,6 +1,6 @@
 
 
-#Notes on Selects:
+#Notes on Selects (1/12):
 
 ### Aliasing extracts data from a column and displays it with the alias specified. 
   - Select Year(GrantRequestDate) as [Year], GrantRequestAmount from GrantRequest
