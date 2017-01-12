@@ -1,17 +1,18 @@
 
 
-Notes on Selects for Selects2 hw:
+#Notes on Selects for Selects2 hw:
 
-- Aliasing extracts data from a column and displays it with the alias specified. 
+### Aliasing extracts data from a column and displays it with the alias specified. 
   - Select Year(GrantRequestDate) as [Year], GrantRequestAmount from GrantRequest
   - Select Month(GrantRequestDate) as [Month], GrantRequestAmount from GrantRequest
   - Select Day(GrantRequestDate) as [Day], GrantRequestAmount from GrantRequest
   - Select DatePart(Minute, GrantRequestDate) from GrantRequest 
   - Select DatePart(Second, GrantRequestDate) from GrantRequest 
 
-- Using built in function, gets the difference between starting and ending dates. 
+ Using built in function, gets the difference between starting and ending dates. 
   - Select DateDiff(Day, GetDate(), '3-23-2017') // 70 days
-  
+
+### Calculations & Casting
 - Calculate 10% of donation amount and label as Operations, calculate 90% and label as Charity, based on the donation column 
   - Select DonationAmount * .10 Operations, DonationAmount * .90 Charity from donation
   
@@ -21,7 +22,7 @@ Notes on Selects for Selects2 hw:
   - Select DonationAmount cast(DonationAmoun as decimal(10,2) * .10 Operations
   - Note: decimal(10,2) is formatting: how many decimals to left and right of period. 
   
-- Formatting: 
+### Formatting: 
   - Turn donation amounts to dollars: 
     - Select format('$ #,##0.00') as Amount from Donation
   - Note: format only works on numbers. Things like phone numbers (which are often recorded as strings) won't work with format like the above example. 
@@ -33,6 +34,7 @@ Declare @SocialSec as nchar(9)
 Set @SocialSec = '555444333'
 Select SUBSTRING(@SocialSec, 1, 3) + '-' + SUBSTRING(@SocialSec, 4, 2) + '-' + SUBSTRING(@SocialSec, 6, 4) as SSNumber
 
+### Aggregate Functions vs. Scalar
 - The above are scalar functions (they operate row-by-row). Aggregate functions operate on groups of rows. 
 
 - Example Aggregate functions: 
@@ -47,6 +49,7 @@ Select SUBSTRING(@SocialSec, 1, 3) + '-' + SUBSTRING(@SocialSec, 4, 2) + '-' + S
   - Select GrantTypeKey, format(avg(GrantRequestAmount), '$ ###0.0') as Average from GrantRequest //won't work by itself. 
   - Group by GrantTypeKey
   
+### Having vs. Where
 - Useful Examples: 
  Select GrantTypeKey, format(avg(GrantRequestAmount), '$ ###0.0') as Average
  format(sum(GrantRequestAmount), '$ ###0.0')  as Total
@@ -58,6 +61,8 @@ Select SUBSTRING(@SocialSec, 1, 3) + '-' + SUBSTRING(@SocialSec, 4, 2) + '-' + S
  - 'Having' always goes *after* group by, 'where' always goes *before*. 
  - In not-ing an expression, you can use the keyword not (standard for SQL), or !=, or <>
  
+ 
+### MetaDetails
  - You can query metadetail thus: 
    - Select name from sys.Tables   // retrieves the names of all the tables.
    - Select * from sys.Tables    // retrieves other data like object inheritance and shema info
