@@ -41,13 +41,15 @@ Select EmployeeKey, EmployeeHourlyPayRate from EmployeePosition order by Employe
 Select EmployeeKey, EmployeeHourlyPayRate from EmployeePosition where EmployeePosition.PositionKey = 2
 
 -- 12. Return the top 10 of the query for question 11
-Select top 10 EmployeeKey, EmployeeHourlyPayRate from EmployeePosition where EmployeePosition.PositionKey = 2
+Select top 10 EmployeeKey, EmployeeHourlyPayRate
+from EmployeePosition where EmployeePosition.PositionKey = 2 
+order by EmployeeHourlyPayRate
 
 -- 13. Using the same query offset by 20 and list 10
 Select EmployeeKey, EmployeeHourlyPayRate from EmployeePosition
- where EmployeePosition.PositionKey = 2 
- order by EmployeeKey offset 20 rows 
- fetch next 10 rows only
+where EmployeePosition.PositionKey = 2 
+order by EmployeeKey offset 20 rows 
+fetch next 10 rows only
 
 -- 14. Using BusScheduleAssignment, Return the busdriverKey and the busrouteKey but remove all duplicates
 Select distinct EmployeeKey, BusRouteKey from BusScheduleAssignment
