@@ -46,8 +46,24 @@ Select PositionName, avg(EmployeeHourlyPayRate) as 'Average Hourly Pay'
  group by PositionName
 
 -- Provide a count of how many employees were hired each year and each month of the year.
+Select DatePart(year, EmployeeHireDate) [Year], 
+DatePart(month, EmployeeHireDate) [Month], 
+Count(EmployeeKey) [Employees Hired]
+from Employee 
+group by DatePart(year, EmployeeHireDate), DatePart(month, EmployeeHireDate)
+order by Year asc
 
 -- Do the query 11 again but with a case structure to output the months as words.
+-- Note: I looked up the month name conversion online, but I think I understand what's happening. 
+
+Select DatePart(year, EmployeeHireDate) [Year], 
+DateName(month , DateAdd(month , DatePart(month, EmployeeHireDate), 0 ) - 1 )[Month], 
+Count(EmployeeKey) [Employees Hired]
+from Employee 
+group by DatePart(year, EmployeeHireDate), DatePart(month, EmployeeHireDate)
+order by Year asc
+
+
 -- Return which positions average more than $50 an hour.
 -- List the total number of riders on Metroalt busses (RiderShip).
 -- List all the tables in the metroAlt databases (system views).
