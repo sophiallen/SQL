@@ -78,3 +78,6 @@ on ContactType.ContactTypeKey = Contact.ContactTypeKey
 where Contact.ContactTypeKey is NULL
 ```
 
+
+###Further Notes: 
+The above are all joined on equal keys, but it's also possible to join on keys greater than or less than. 
