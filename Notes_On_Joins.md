@@ -35,7 +35,7 @@ where ContactTypeKey = 1
 *Example 2:* Combining inner joins and aggregate functions to create a summary
 ```
 Select Year(GrantRequestDate) [Year], GrantTypeName, Sum(GrantRequestAmount) as Request, 
-Sum(GrantAllocationAmount) as Granted
+Sum(GrantAllocationAmount) as Granted, Sum(GrantAllocationAmount)/sum(GrantRequestAmount) as Percentage
 From GrantRequest gr
 INNER JOIN GranteType gt
 ON gr.GrantTypeKey = gt.GrantTypeKey
@@ -45,6 +45,36 @@ GROUP BY Year(GrantRequestDate), GrantTypeName
 ORDER BY Year(GrantRequestDate)
 ```
 
+##Outer Joins
+This type of join only shows matches on one side, and shows full data on the other. 
+Left/Right specifies whether the first or second table named will display full data.
+* Good for finding mis-matches, ex: customers that have not made purchases, etc. 
+
+```
+Select GrantTypeName, GrantRequest.GrantTypeKey
+From GrantType
+Left Outer Join GrantRequest 
+on GrantType.GrantTypeKey = GrantRequest.GrantRequestKey
+```
+
+
+*Example:* Find ContactType that has no ContactTypeKey
+```
+Select ContactTypeName, Contact.ContactTypeKey
+from ContactType
+left outer Join Contact
+on ContactType.ContactTypeKey = Contact.ContactTypeKey
+where Contact.ContactTypeKey is NULL
+```
+
 
 ##Full Joins: 
+Returns everything from both tables, whether they match or not. 
+```
+Select Distinct ContactTypeName, Contact.ContactTypeKey
+from ContactType
+Full Join Contact
+on ContactType.ContactTypeKey = Contact.ContactTypeKey
+where Contact.ContactTypeKey is NULL
+```
 
