@@ -33,7 +33,8 @@
 ```
 Declare @SocialSec as nchar(9)
 Set @SocialSec = '555444333'
-Select SUBSTRING(@SocialSec, 1, 3) + '-' + SUBSTRING(@SocialSec, 4, 2) + '-' + SUBSTRING(@SocialSec, 6, 4) as SSNumber
+Select SUBSTRING(@SocialSec, 1, 3) + '-' + SUBSTRING(@SocialSec, 4, 2) 
++ '-' + SUBSTRING(@SocialSec, 6, 4) as SSNumber
 ```
 ### Aggregate Functions vs. Scalar
 - The above are scalar functions (they operate row-by-row). Aggregate functions operate on groups of rows. 
