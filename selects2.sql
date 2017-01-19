@@ -65,6 +65,18 @@ order by Year asc
 
 
 -- Return which positions average more than $50 an hour.
+Select PositionName
+from EmployeePosition inner join Position 
+on EmployeePosition.PositionKey = Position.PositionKey
+group by PositionName
+having avg(EmployeeHourlyPayRate) > 50; --(Result: Accountant, Lawyer, Manager)
+ 
 -- List the total number of riders on Metroalt busses (RiderShip).
+select sum(Riders) from Ridership -- result: 23154666
+
 -- List all the tables in the metroAlt databases (system views).
+select name from sys.tables
+
 -- List all the databases on server.
+select name from sys.databases
+
