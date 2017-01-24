@@ -20,3 +20,13 @@ Where EmployeeKey in (
 Select EmployeeKey from EmployeePosition 
 where PositionKey = (
 Select PositionKey from Position where PositionName = 'Manager'))
+
+
+-- Current progress on Q3:
+Select Year(BusScheduleAssignmentDate) as 'Year',
+(Select sum(Riders) from Ridership) as 'Total',
+ avg(Riders) as 'Annual Average Ridership'
+from Ridership 
+inner join BusScheduleAssignment bsa
+on Ridership.BusScheduleAssigmentKey = bsa.BusScheduleAssignmentKey
+group by Year(bsa.BusScheduleAssignmentDate)
