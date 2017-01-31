@@ -11,7 +11,6 @@ on p.PersonKey  = pa.PersonKey)
 where City = 'Bellevue'
 ```
 
-
 ``` 
 Select RequestMonth, GrantTypeName, Count(GrantTypeName) as [Count]
 from
