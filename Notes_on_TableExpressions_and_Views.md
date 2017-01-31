@@ -75,7 +75,7 @@ on p.PersonKey  = pa.PersonKey)
 where City = @City
 ```
 
-## Views
+## Creating & Using Views
 In essence, views are stored queries. 
 - Views always have an ```as```, just like functions and stored proceedures. The ```as``` keyword is used to assign value. 
 - Be wary of batches, it's a good idea to have a ```go``` statement or semicolon to mark end of the code. 
@@ -100,9 +100,27 @@ on ep.PositonKey = pos.PositionKey;
 
 *After running and refreshing the db explorer, the 'views' folder should have your new view displayed.*
 
-- **Use your view**  by running:```Select * from vw_Employees```
+- Run your view by querying:```Select * from vw_Employees```
 
 ### Notes on views 
 - Inserting/Updating through views is only possible if there are no aliases, joins, or subqueries. In general, it's not a great idea. 
-- You are not allowed inside of a view to use ```order by```. When *running* the view you can order the results, but not in the definition of the view itself. 
+- You are not allowed inside of a view to use ```order by```. When *running* the view you can order the results (ex: ```Select * from vw_Employees order by LastName```), but not in the definition of the view itself. 
+
+### SchemaBinding
+Creating a view with schemabinding locks the underlying table so that it cannot be altered unless the view has been dropped. Schemabinding helps prevent broken views. 
+```
+alter view vw_Employees with schemabinding
+As 
+Select 
+PersonLastName LastName, PersonFirstName FirstName, 
+EmployeeHireDate [Hire Date], EmployeeAnnualSalary Salary,  
+PositionName [Position]
+from dbo.Person p
+inner join dbo.Employee e 
+on p.PersonKey = e.PersonKey
+inner join dbo.EmployeePosition ep
+on e.EmployeeKey = ep.EmployeeKey
+inner join dbo.Position pos
+on ep.PositonKey = pos.PositionKey;
+```
 
