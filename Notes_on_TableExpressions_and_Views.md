@@ -124,3 +124,50 @@ inner join dbo.Position pos
 on ep.PositonKey = pos.PositionKey;
 ```
 
+Creating a view that is owned by a table: (only users with permission to access the Donors objects will be able to use that view)
+```
+Create view Donor.vw_Donors
+Select PersonLastName, PersonFirstName, PersonEmail
+DonationDate, DonationAmount
+from PErson p 
+inner join Donation d
+on 
+p.PersonKey = d.PersonKey
+```
+
+## Table Valued Functions
+Table-valued functions are functions that return tables. 
+
+**Example: ** A function that shows which employees reviewed which grants. 
+```
+create function fx_EmployeeGrantReviews --function name
+(@EmloyeeKey int) --parameters
+returns table --specify return type
+as -- assignment
+Return 
+Select GrantRequestKey, GrantRequestDate, GrantReviewDate, PersonKey, 
+GrantReqestExplanation, GrantRequestAmount, GrantAllocationAmount
+from GrantRequest grq 
+inner join GrantReview grv
+on grq.GrantRequestKey = grv.GrantRequestKey
+where EmployeeKey = @EmployeeKey
+```
+
+***Run the function:*** ``` Select dbo.fx_EmployeeGrantReviews(5) ``` (note that you must use the schema dbo to access the function) 
+
+
+## Cross-Applies
+"The APPLY operator allows you to invoke a table-valued function for each row returned by an outer table expression of a query" - technet. 
+
+Returns the top three of each grant type.
+```
+Select distinct g.GrantTypeKey, c.GrantRequestAmount
+from dbo.GrantRequest as g
+Cross Apply
+(Select GrantTypeKey, GrantRequestAmout, GrantREquestKey
+from dbo.GrantRequest r
+where g.GrantTypeKey = r.GrantTypeKey 
+order by GrantRequestAmount desc, GrantTypeKey desc
+offset 0 rows fetch first 3 rows only) as c
+
+```
