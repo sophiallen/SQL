@@ -171,3 +171,10 @@ end catch
 
 ```
 
+**Example:** use a select to get PersonKey rather than passing it in as a parameter
+
+```
+Declare @PersonKey int
+Select @PersonKey  = PersonKey from Person
+where PersonEmail = @PersonEmail
+```
