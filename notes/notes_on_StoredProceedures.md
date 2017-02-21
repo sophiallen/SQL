@@ -32,7 +32,8 @@ set @seed = dbo.fx_GetSeed()  -- get a semi-random number and save it to the var
 Declare @pass varbinary(500)
 set @pass = dbo.fx_HashPassword(@seed, @PersonPassword)  --get the hash of the password. 
 
-insert into Person(PersonLastName, PersonFirstName, PersonEmail, PersonPassWord, PersonEntryDate, PersonPasswordSeed)
+insert into Person(PersonLastName, PersonFirstName, PersonEmail,
+PersonPassWord, PersonEntryDate, PersonPasswordSeed)
 values (@PersonLastName, @PersonFirstName, @PersonEmail, @pass, GetDate(), @seed)
 
 declare @PersonKey int 
@@ -79,13 +80,13 @@ exec use_Registration
 Should show three rows affected: Person, PersonAddress, and Contact. 
 
 
-**Ensuring that either all inserts worked, or none did.**
+### Ensuring that either all inserts worked, or none did.
 We'll use a transactiona nd a try/catch block. 
 
 In the above stored proceedure, we added the lines before the first insert: 
 ```
-Begin tran
 Begin try
+Begin tran
 ```
 
 And then the following after all of the inserts, to commit the changes after all the errors have been avoided. 
@@ -103,7 +104,7 @@ return -1
 end
 ```
 
-**Checking for entries that have already been added**
+### Checking for entries that have already been added
 
 Put before the seed declaration: 
 ```
@@ -121,3 +122,52 @@ begin
 print "Person already exists"
 end
 ```
+
+## Proceedure for updating information
+Note that the below example ignores changing passwords. 
+```
+create proc usp_UpdatePersonInfo
+@PersonKey int
+@PersonLastName nvarchar(255), 
+@PersonFirstName nvarchar(255),
+@PersonEmail nvarchar(255),
+@PersonAddressApt nvarchar(255) = null, 
+@PersonAddressStreet nvarchar(255),
+@PersonAddressCity nvarchar(255),
+@PersonAddressState nvarchar(2) = 'WA', 
+@PersonAddressZip nvarchar(9),
+@HomePhone nvarchar(10) = null,
+@WorkPhone nvarchar(10) = null
+
+as 
+
+begin try
+begin tran
+update Person
+set PersonLastName = @PersonLastName. 
+PersonFirstName = @PersonFirstName,
+PersonEmail = @PersonEmail,
+PersonAddressApt = @PersonAddressApt, 
+PersonAddressStreet = @PersonAddressStreet,
+PersonAddressCity = @PersonAddressCity,
+PersonAddressState = @PersonAddressState,
+PersonAddressZip = @PersonAddressZip
+where PersonKey = @PersonKey
+
+update Contact
+Set ContactNumber = @HomePhone where 
+PersonKey = @PersonKey and ContactTypeKey = 1
+
+Update Contact 
+set ContactNumber = @WorkPhone where
+PersonKey = @PersonKey and ContactTypeKey = 2
+commit tran
+
+end try
+begin catch
+Rollback tran
+print Error_Message()
+end catch
+
+```
+
