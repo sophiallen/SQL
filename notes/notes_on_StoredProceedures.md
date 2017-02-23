@@ -37,7 +37,7 @@ PersonPassWord, PersonEntryDate, PersonPasswordSeed)
 values (@PersonLastName, @PersonFirstName, @PersonEmail, @pass, GetDate(), @seed)
 
 declare @PersonKey int 
-set @PersonKey = ident_current(Person) -- get the key of the person we just inserted into Person. 
+set @PersonKey = ident_current('Person') -- get the key of the person we just inserted into Person. 
 
 insert into PersonAddres(PersonAddressApt, PersonAddressStreet,
 PersonAddressCity, PersonAddressState, PersonAddressZip, PersonKey)
