@@ -10,12 +10,12 @@ Start temp table names with ```#``` to indicate the table is temporary
 *In the below example, matching the column names to the Person table doesn't matter, but data types do.* 
 ```
 Create Table #TempPerson 
-{
+(
   PersonKey int,
   PersonLastName nvarchar(255),
   PersonFirstName nvarchar(255),
   PersonEmail nvarchar(255)
-}
+)
 ```
 
 Populate the temp table with data from another:
@@ -28,12 +28,12 @@ select PersonKey, PersonLastName, PersonFirstName, PersonEmail from Person
 You can make a temp table global (accessible by more than one session at a time) by adding an extra hash mark to its name, signifying that it is a global temp table. Once all the sessions connected to the temp table are closed, the temp table will disappear. 
 ```
 Create Table ##GlobalTempPerson 
-{
+(
   PersonKey int,
   PersonLastName nvarchar(255),
   PersonFirstName nvarchar(255),
   PersonEmail nvarchar(255)
-}
+)
 ```
 
 
