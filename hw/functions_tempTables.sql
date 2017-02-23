@@ -53,7 +53,6 @@ end
 
 select dbo.fx_getTwoWeekSalary(5)
 
-
 --Create a function to determine a hourly rate for a new employee. Take difference
 --between top and bottom pay for the new employees position (say driver) and then subtract
 --the difference from the maximum pay. (and yes this is very arbitrary).
