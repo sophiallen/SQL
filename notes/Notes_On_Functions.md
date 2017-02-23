@@ -45,7 +45,7 @@ We've already done table-valued functions, today we'll do scalar functions. To t
 ```
 create function fx_cube  -- function name
 ( @number int)           -- arguments and their data types
-returns in               -- return type
+returns int               -- return type
 as 
 Begin
   return @number * @number * @number
