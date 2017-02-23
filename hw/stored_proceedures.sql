@@ -16,9 +16,9 @@ as
 declare @EmployeeEmail nvarchar(255)
 set @EmployeeEmail = dbo.fx_getEmail(@EmployeeFirstName, @EmployeeLastName)
 
-begin tran
-begin try 
 
+begin try 
+begin tran
 if not exists (Select EmployeeKey from Employee where EmployeeEmail = @EmployeeEmail)
 begin 
 
