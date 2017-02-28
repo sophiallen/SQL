@@ -1,7 +1,7 @@
 
 
 
-# Stored Proceedures (2/21)
+# Stored Procedures (2/21)
 
 Ex: Register a new person in CommunityAssist
 - Sub-Tasks:
@@ -13,7 +13,7 @@ Ex: Register a new person in CommunityAssist
   - Ensure that either all or none of the above happen. 
   
 ```
-create proceedure usp_Registration
+create procedure usp_Registration
 @PersonLastName nvarchar(255),  -- Declaring variables to hold incoming information. 
 @PersonFirstName nvarchar(255),
 @PersonEmail nvarchar(255),
