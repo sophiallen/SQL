@@ -55,4 +55,30 @@ commit tran
 -- address, city, zip, not email etc.  The employee key should be one of its parameters. Use 
 -- the procedure to alter one of the employees information. Add error trapping to catch any errors.
 
+create procedure usp_UpdateEmployeeInfo
+@EmployeeKey int,
+@EmployeeLastName nvarchar(255),
+@EmployeeFirstName nvarchar(255),
+@EmployeeAddress nvarchar(255),
+@EmployeeZipCode nchar(5)
+as
 
+begin try 
+begin tran
+
+update Employee
+set EmployeeLastName = @EmployeeLastName,
+EmployeeFirstName =  @EmployeeFirstName,
+EmployeeAddress = @EmployeeAddress,
+EmployeeZipCode = @EmployeeZipCode
+where EmployeeKey = @EmployeeKey
+
+commit tran
+
+end try
+begin catch
+
+Rollback tran
+print Error_Message()
+
+end catch
