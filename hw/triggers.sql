@@ -49,4 +49,25 @@ Select BusDriverShiftKey, EmployeeKey, BusRouteKey, BusScheduleAssignmentDate, B
 
 end
 
+--Testing: 
+insert into BusScheduleAssignment(
+BusDriverShiftKey, EmployeeKey, 
+BusRouteKey, BusScheduleAssignmentDate, BusKey)
+values (
+1, 33, 99, getDate(), 95
+)
+
+insert into BusScheduleAssignment(
+BusDriverShiftKey, EmployeeKey, 
+BusRouteKey, BusScheduleAssignmentDate, BusKey)
+values (
+2, 33, 99, getDate(), 95
+)
+
+select * from BusScheduleAssignment order by BusScheduleAssignmentDate desc
+select * from Overtime
+
+
+
+
 
