@@ -9,6 +9,8 @@ A few rules of xml:
 - Every element has one root. (Tree structure)
 - Recommended to use namespacing. (As seen in the xmlns="http://pseudo/link/to/xmlfile") 
 
+Performance note:
+- The entire document must be processed in order to construct the tree, so large documents can take a long time. 
 
 ```
 create xml schema collection MaintenanceNotesSchema as 
@@ -82,7 +84,7 @@ values (ident_current(Maintenance), 66, 3,
 
 select top 10 EmployeesLastName, EmployeeFirstName, EmployeeEmail from Employee
 for xml raw('employee'), elements, root('Employees')
-//right click the results that are displayed in the console to view the xml
+-- right click the results that are displayed in the console to view the xml
 ```
 
 **Notes**
