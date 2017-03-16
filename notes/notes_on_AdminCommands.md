@@ -7,6 +7,7 @@ A few notes:
 - Typically, after creating a login via sql server, that login is given public access to the server, but not to the databases. 
 
 <br/>
+
 **Example:** Create a login with a default database. 
 ```
 Create login EmployeesLogin with password = 'P@ssw0rd1', default_database=Community_Assist
