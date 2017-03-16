@@ -31,7 +31,6 @@ Create user ManagerLogin for login ManagersLogin
 --Add that user to the Role.
 Alter role ManagementRole add member ManagerLogin
 
-
 --Login to the database as the new User, (Remember that SQL server authentication must be enabled for this to work.)
 --Run the query to view the annual ridership. Does it work?
 --Try to select from the table Employees. Can you do it?
