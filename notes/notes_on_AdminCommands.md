@@ -1,6 +1,7 @@
 
 # Administrative Commands (3/7/2017)
 <br/>
+
 ## Logins and Users
 A few notes: 
 - You can use windows login to authenticate users on windows machines. Encrypted Keys and certificates are other methods of authentication. 
